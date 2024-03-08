@@ -26,3 +26,14 @@ input::placeholder {
 .flag {
   box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.0294384);
 }
+.single-country {
+  background-color: #202c36;
+  color: #ffffff;
+}
+.back-button {
+  background: #2b3844;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.293139);
+}
+.single-country-flag {
+  box-shadow: 0px 0px 14px 4px rgba(0, 0, 0, 0.0294384);
+}
