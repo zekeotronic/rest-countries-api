@@ -27,21 +27,39 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./css/main.css" />
-    <link rel="stylesheet" href="./css/light.css" />
+    <link rel="stylesheet" href="./css/light.css" id="theme" />
     <title>Countries REST API | Frontend Mentor</title>
-    <script
-      src="https://kit.fontawesome.com/45ef8ad18a.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
-    <!-- <i class="fa-solid fa-moon"></i> -->
-    <!-- <i class="fa-solid fa-lightbulb"></i> -->
-    <!-- <i class="fa-solid fa-angle-up"></i> -->
-    <!-- <i class="fa-solid fa-angle-down"></i> -->
-    <!-- <i class="fa-solid fa-arrow-left-long"></i> -->
   </head>
   <body>
-    <h1>HELLO WORLD</h1>
+    <header>
+      <h1 class="header-h1">Where in the world?</h1>
+      <div id="theme-chooser">
+        <img src="./assets/moon.svg" alt="theme icon" id="theme-icon" />
+        <p id="theme-text">Dark Mode</p>
+      </div>
+    </header>
+    <main>
+      <div id="search-wrapper" class="search-wrapper">
+        <div id="search-bar-wrapper" class="search-bar-wrapper">
+          <img src="./assets/search.svg" alt="search-icon" id="search-icon" />
+          <input
+            type="text"
+            id="search-input"
+            class="search-input"
+            placeholder="Search for a country..."
+          />
+        </div>
+        <select name="regions" id="regions-select" class="regions-select">
+          <option value="">Filter by Region</option>
+          <option value="africa">Africa</option>
+          <option value="america">America</option>
+          <option value="asia">Asia</option>
+          <option value="europe">Europe</option>
+          <option value="oceania">Oceania</option>
+        </select>
+      </div>
+      <div id="countries-wrapper" class="countries-wrapper"></div>
+    </main>
     <script src="./js/main.js"></script>
   </body>
 </html>
