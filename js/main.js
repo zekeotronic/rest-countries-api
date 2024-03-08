@@ -5,6 +5,7 @@ const themeIcon = document.getElementById('theme-icon');
 const searchIcon = document.getElementById('search-icon');
 const countries = document.getElementById('countries-wrapper');
 const regionsSelect = document.getElementById('regions-select');
+const searchInput = document.getElementById('search-input')
 const darkMode = './css/dark.css';
 const lightMode = './css/light.css';
 const moon = './assets/moon.svg';
@@ -75,6 +76,19 @@ function clearCountries() {
   }
 }
 
+function findCountry() {
+  const value = searchInput.value.toLowerCase();
+  const cards = document.querySelectorAll('.country-card');
+  cards.forEach(card => {
+    const countryName = card.querySelector('h2').textContent.toLowerCase();
+    if (countryName.includes(value)) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  })
+}
+
 async function getAllCountries() {
   const response = await fetch('https://restcountries.com/v3.1/all');
   const data = await response.json();
@@ -110,3 +124,7 @@ regionsSelect.addEventListener('change', (e) => {
     })
   }
 })
+
+
+
+searchInput.addEventListener('input', findCountry);
