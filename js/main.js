@@ -4,6 +4,7 @@ const themeText = document.getElementById('theme-text');
 const themeIcon = document.getElementById('theme-icon');
 const searchIcon = document.getElementById('search-icon');
 const countries = document.getElementById('countries-wrapper');
+const regionsSelect = document.getElementById('regions-select');
 const darkMode = './css/dark.css';
 const lightMode = './css/light.css';
 const moon = './assets/moon.svg';
@@ -28,7 +29,7 @@ const icons = {
   }
 };
 
-// checkForDarkMode();
+checkForDarkMode();
 themeChooser.addEventListener('click', toggleDarkMode);
 
 function toggleDarkMode() {
@@ -66,7 +67,12 @@ function createCountyCard(country) {
     </div>
   `;
   return card;
+}
 
+function clearCountries() {
+  while (countries.firstChild) {
+    countries.removeChild(countries.firstChild);
+  }
 }
 
 async function getAllCountries() {
@@ -81,10 +87,26 @@ async function getCountriesByRegion(region) {
   return data;
 }
 
-
-
 getAllCountries().then(data => {
   data.forEach(country => {
     countries.appendChild(createCountyCard(country));
   });
-  })
+})
+
+regionsSelect.addEventListener('change', (e) => {
+  clearCountries();
+  const region = e.target.value;
+  if (region === '') {
+    getAllCountries().then(data => {
+      data.forEach(country => {
+        countries.appendChild(createCountyCard(country));
+      });
+    })
+  } else {
+    getCountriesByRegion(region).then(data => {
+      data.forEach(country => {
+        countries.appendChild(createCountyCard(country));
+      });
+    })
+  }
+})
