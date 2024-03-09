@@ -40,3 +40,8 @@ input::placeholder {
 .single-country-flag {
   box-shadow: 0px 0px 14px 4px rgba(0, 0, 0, 0.0294384);
 }
+.border-button {
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.293139);
+  background-color: #ffffff;
+  color: #111517;
+}

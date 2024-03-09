@@ -11,6 +11,16 @@ const regionsSelect = document.getElementById('regions-select');
 const searchInput = document.getElementById('search-input')
 const singleCountry = document.getElementById('single-country');
 const singleCountryFlag = document.getElementById('single-country-flag');
+const singleCountryCommonName = document.getElementById('single-country-common');
+const nativeName = document.getElementById('native-name');
+const population = document.getElementById('population');
+const region = document.getElementById('region');
+const subRegion = document.getElementById('sub-region');
+const capital = document.getElementById('capital');
+const topLevelDomain = document.getElementById('top-level-domain');
+const currencies = document.getElementById('currencies');
+const languages = document.getElementById('languages');
+const borderCountries = document.getElementById('border-countries');
 
 const darkMode = './css/dark.css';
 const lightMode = './css/light.css';
@@ -115,6 +125,46 @@ function getCountryCards() {
       getCountryByName(country).then(data => {
         singleCountryFlag.src = data[0].flags.svg;
         console.log(data[0]);
+        singleCountryCommonName.textContent = data[0].name.common;
+        let nameKeys = Object.keys(data[0].name.nativeName);
+        nativeName.innerHTML = `<strong>Native Name: </strong>${data[0].name.nativeName[nameKeys[0]].common}`;
+        population.innerHTML = `<strong>Population: </strong>${data[0].population.toLocaleString('en-us')}`;
+        region.innerHTML = `<strong>Region: </strong>${data[0].region}`;
+        subRegion.innerHTML = `<strong>Sub Region: </strong>${data[0].subregion}`;
+        capital.innerHTML = `<strong>Capital: </strong>${data[0].capital}`;
+        topLevelDomain.innerHTML = `<strong>Top Level Domain: </strong>${data[0].tld}`;
+        let currencyKeys = Object.keys(data[0].currencies);
+        let currencyString = currencyKeys.join(', ');
+        currencies.innerHTML = `<strong>Currencies: </strong>${currencyString}`;
+        let languageKeys = Object.keys(data[0].languages);
+        let languageString = languageKeys.map(key => data[0].languages[key]).join(', ');
+        languages.innerHTML = `<strong>Languages: </strong>${languageString}`;
+        while (borderCountries.lastChild) {
+          borderCountries.removeChild(borderCountries.firstChild);
+        }
+        if ("borders" in data[0]) {
+          const bordersArray = data[0].borders;
+          console.log(bordersArray);
+          const borderText = document.createElement('p');
+          borderText.textContent = 'Border Countries: ';
+          borderText.classList.add('borders-text');
+          borderCountries.appendChild(borderText);
+          bordersArray.forEach(border => {
+            const borderButton = document.createElement('div');
+            borderButton.textContent = codeMap[border];
+            borderButton.classList.add('border-button');
+            borderButton.setAttribute('data-country', codeMap[border]);
+            borderButton.addEventListener('click', (e) => {
+              const country = e.target.getAttribute('data-country');
+              singleCountry.classList.add('hidden');
+              const y = document.getElementById(country).getBoundingClientRect().top;
+              window.scrollTo(0, y);
+            });
+            borderCountries.appendChild(borderButton);
+          
+          })
+        }
+        // const borderNames = bordersArray.map(border => codeMap[border]);
       })
     });
   })
