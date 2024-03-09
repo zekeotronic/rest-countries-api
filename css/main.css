@@ -469,4 +469,7 @@ main {
   .languages {
     grid-row: 9/10;
   }
+  .hidden {
+    display: none;
+  }
 }

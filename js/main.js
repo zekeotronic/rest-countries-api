@@ -235,3 +235,4 @@ backButton.addEventListener('click', (e) => {
 //   console.log(card);
 // });
 
+// singleCountry.style.display = 'none';
